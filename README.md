@@ -51,9 +51,9 @@ self.timer = [NSTimer timerWithTimeInterval:1.0 target:self selector:@selector(t
 
 - 此时我们就会想把 Target 设置为 weakSelf ,运行后也不起作用. 是由于我们的 self 和 weakSelf 都是指针指向控制器，控制器的dealloc需要timer的销毁才调用。同样造成相互强引用。
 
-	```
-  		__weak typeof(self) weakSelf = self;
-	self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:weakSelf selector:@selector(timerAction:) userInfo:nil repeats:NO];
+```
+__weak typeof(self) weakSelf = self;
+self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:weakSelf selector:@selector(timerAction:) userInfo:nil repeats:NO];
 ```
 
 ![](NSTimer.png)
@@ -103,6 +103,7 @@ self.timer = nil;
 ```
 
 ### 4.使用 GCD 定时器
+
 
 ```
 // GCD 定时器
